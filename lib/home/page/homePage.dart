@@ -9,7 +9,7 @@ import 'package:flutter_demo/widget/banner/banner_entity.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatelessWidget {
-  GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
+
   void _login(BuildContext context, int index) async {
     print("index  ----》》》》 ： $index");
     var resul = await Navigator.push(
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
 
     print("登录数据 $resul");
     if (null != resul) {
-      key.currentState.showSnackBar(SnackBar(content: Text(resul.toString())));
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(resul.toString())));
     }
   }
 
@@ -46,14 +46,14 @@ class HomePage extends StatelessWidget {
   Widget getListItem(BuildContext context, int index) {
     return InkWell(
       onTap: () {
-        key.currentState.hideCurrentSnackBar();
-        key.currentState.showSnackBar(SnackBar(
+        Scaffold.of(context).hideCurrentSnackBar();
+        Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("点击了第 $index 条"),
         ));
       },
       onLongPress: () {
-        key.currentState.hideCurrentSnackBar();
-        key.currentState.showSnackBar(SnackBar(
+        Scaffold.of(context).hideCurrentSnackBar();
+        Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("长按 $index 条"),
         ));
       },
