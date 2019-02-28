@@ -1,6 +1,5 @@
 package com.hezhihu89.flutterdemo;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import io.flutter.app.FlutterActivity;
