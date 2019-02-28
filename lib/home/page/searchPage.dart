@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_demo/utils/battertlev.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -28,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
   Future<Null> _getBatteryLevel() async {
     String batteryLevel;
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
+      final int result = await BatteryLev.batteryLev.getPlatformVersion();
       final resultPlugin =
           await platformDemo.invokeMethod("getPlatformVersion");
       batteryLevel = 'Battery level at $result % .$resultPlugin';
