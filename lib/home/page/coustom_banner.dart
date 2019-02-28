@@ -108,7 +108,7 @@ class _BannerState extends State<CoustomBanner>{
           onTap: (){
 
             Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                WebViewActivity(widget.data[index % widget.data.length].bannerUrl,
+                WebViewActivity(widget.data[index % widget.data.length].actionUrl,
                   title: widget.data[index % widget.data.length].bannerTitle,
                 )
             ));

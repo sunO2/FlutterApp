@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget{
 
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
 
-
   void _login(BuildContext context,int index) async{
     print("index  ----》》》》 ： $index");
     var resul = await Navigator.push(context,
@@ -21,7 +20,6 @@ class HomePage extends StatelessWidget{
         => new LoginActivity(index: index)
         ));
 
-//    var resul = await Navigator.of(context).pushNamed("login");
     print("登录数据 $resul");
     if(null != resul){
       key.currentState.showSnackBar(SnackBar(content: Text(resul.toString())));
@@ -31,7 +29,7 @@ class HomePage extends StatelessWidget{
 
 
 
-  Future<List> _getBanner() async {
+  Future<List<BannerEntity>> _getBanner() async {
 
     var http = HttpClient();
     var uri = Uri.http("www.wanandroid.com","/banner/json");
@@ -39,15 +37,16 @@ class HomePage extends StatelessWidget{
     var response = await request.close();
     var body = await response.transform(Utf8Decoder()).join();
 
-    List<SimpleEntity> datas = new List();
-    var jsons = json.decode(body,reviver: (key,value){
-      print("key = $key ; value = $value");
-      if(key == "imagePath"){
-        datas.add(SimpleEntity(url:value,title: "玩Android"));
-      }
-    });
-    return datas;
-    print("json $jsons");
+    Map<String,dynamic> jsonStr = json.decode(body);
+    List list = jsonStr['data'];
+    return list.map((item){
+      var itemEntity = SimpleEntity.fromJson(item);
+      print("DATAS = 发送请求 数据 $item  -->>>>  ${itemEntity.runtimeType}");
+      return itemEntity;
+
+    }).toList();
+
+
   }
 
   //  @override
@@ -169,6 +168,11 @@ class HomePage extends StatelessWidget{
         future: _getBanner(),
           builder: (context,connectionState){
         if(connectionState.connectionState == ConnectionState.done){
+          if(null == connectionState.data){
+            return Center(
+              child: CupertinoActivityIndicator(),
+            );
+          }
           return ListView.builder(
             itemCount: 15,
             itemBuilder: (context, index) {
@@ -189,7 +193,7 @@ class HomePage extends StatelessWidget{
                       child: FadeInImage.memoryNetwork(
                         placeholder: kTransparentImage,
                         image: entity.bannerUrl.toString(),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ),
                     );
                   },
@@ -211,24 +215,33 @@ class HomePage extends StatelessWidget{
             child: CupertinoActivityIndicator(),
           );
         }
-
       }),
     );
   }
 
 }
 
-class SimpleEntity extends Object with BannerEntity {
+class SimpleEntity extends BannerEntity {
   final String obj;
-  final String url;
+  final String imageUrl;
   final String title;
+  final String url;
 
-  SimpleEntity({this.obj, this.url, this.title});
+  SimpleEntity({this.obj, this.imageUrl, this.title,this.url});
+
+  SimpleEntity.fromJson(Map<String,dynamic> json,{this.obj}):
+        imageUrl = json['imagePath'],
+        url = json["url"],
+        title = json['title'];
 
   @override
-  get bannerUrl => url;
+  get bannerUrl => imageUrl;
 
   @override
   get bannerTitle => title;
+
+  @override
+  get actionUrl => url;
+
 }
 
