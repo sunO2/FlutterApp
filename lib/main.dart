@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_demo/home/home.dart';
 import 'package:flutter_demo/home/login.dart';
 
-
-void main(){
+void main() {
 //  debugPaintSizeEnabled = true;
-///捕获全局异常
-  runZoned(()=> runApp(new MyApp()),onError: (object, stackTrace){
-      print("object ：$object ----->>>>  stackTrace: $stackTrace");
+  ///捕获全局异常
+  runZoned(() => runApp(new MyApp()), onError: (object, stackTrace) {
+    print("object ：$object ----->>>>  stackTrace: $stackTrace");
   });
 }
 
@@ -17,7 +16,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: new ThemeData(
@@ -34,15 +32,12 @@ class MyApp extends StatelessWidget {
 //        primaryColor: Colors.black38
       ),
       home: new MyHomePage(title: 'Chart'),
-      onGenerateTitle: (BuildContext context){
+      onGenerateTitle: (BuildContext context) {
         return "头部";
       },
-      routes: <String,WidgetBuilder>{
-        "login":(BuildContext context) => LoginActivity(),
+      routes: <String, WidgetBuilder>{
+        "login": (BuildContext context) => LoginActivity(),
       },
     );
   }
 }
-
-
-

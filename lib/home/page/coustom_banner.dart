@@ -5,20 +5,19 @@ import 'package:flutter_demo/home/webView.dart';
 import 'package:flutter_demo/utils/log.dart';
 import 'package:flutter_demo/widget/banner/banner_entity.dart';
 
-
-typedef IIndexedWidgetBuilder(int index,BannerEntity entity);
+typedef IIndexedWidgetBuilder(int index, BannerEntity entity);
 
 int maxCount = double.maxFinite.toInt() - 2;
 
 int _currentPage = 0;
+
 ///自定义的 Banner 滑动页面
 /// 可定时
-class CoustomBanner extends StatefulWidget{
-
+class CoustomBanner extends StatefulWidget {
   final List<BannerEntity> data;
 
   final IIndexedWidgetBuilder itemBuilder;
-   //滑动周期
+  //滑动周期
   final int delayTime;
 
   final int duration;
@@ -27,22 +26,19 @@ class CoustomBanner extends StatefulWidget{
 
   ///数据
   ///banner 内容构造器
-  CoustomBanner({
-    @required this.data,
-    @required this.itemBuilder,
-    this.delayTime = 1500,
-    this.duration = 300
-  }):assert(null != data),
-     assert(null != itemBuilder);
-
+  CoustomBanner(
+      {@required this.data,
+      @required this.itemBuilder,
+      this.delayTime = 1500,
+      this.duration = 300})
+      : assert(null != data),
+        assert(null != itemBuilder);
 
   @override
   State<StatefulWidget> createState() => _BannerState();
-
 }
 
-class _BannerState extends State<CoustomBanner>{
-
+class _BannerState extends State<CoustomBanner> {
   ///page 滑动控制器
   PageController _controller;
 
@@ -53,6 +49,7 @@ class _BannerState extends State<CoustomBanner>{
   void initState() {
     print("初始化页面状态");
     LogUtils.log("hahah");
+
     ///计算当前页面的值
     double current = (maxCount / 2) - ((maxCount / 2) % widget.data.length);
     _controller = PageController(initialPage: _currentPage);
@@ -61,10 +58,10 @@ class _BannerState extends State<CoustomBanner>{
   }
 
   ///开启滑动
-  void start(){
+  void start() {
     stop();
-    _timer = Timer.periodic(Duration(milliseconds: widget.delayTime),(timer){
-      if(widget.data.length > 0) {
+    _timer = Timer.periodic(Duration(milliseconds: widget.delayTime), (timer) {
+      if (widget.data.length > 0) {
         _controller.animateToPage(_controller.page.toInt() + 1, //切换页面
             duration: Duration(milliseconds: widget.duration), //切换时间
             curve: Curves.decelerate); //切换方式 差值器
@@ -73,7 +70,7 @@ class _BannerState extends State<CoustomBanner>{
   }
 
   ///停止滑动
-  void stop(){
+  void stop() {
     _timer?.cancel();
     _timer = null;
   }
@@ -84,34 +81,33 @@ class _BannerState extends State<CoustomBanner>{
     return Container(
       height: 180.0,
       child: Stack(
-        children: <Widget>[
-          createViewPage()
-        ],
+        children: <Widget>[createViewPage()],
       ),
     );
   }
 
   ///构建 ViewPage
-  Widget createViewPage(){
+  Widget createViewPage() {
     return PageView.builder(
-      itemCount:widget.data.length>0?maxCount.toInt():0,
+      itemCount: widget.data.length > 0 ? maxCount.toInt() : 0,
       controller: _controller,
-      onPageChanged: (index){
-        setState(() {
-
-        });
+      onPageChanged: (index) {
+        setState(() {});
       },
-      itemBuilder: (context,index){
+      itemBuilder: (context, index) {
         print("构建页面");
         return InkWell(
-          child: widget.itemBuilder(index,widget.data[index % widget.data.length]),
-          onTap: (){
-
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                WebViewActivity(widget.data[index % widget.data.length].actionUrl,
-                  title: widget.data[index % widget.data.length].bannerTitle,
-                )
-            ));
+          child: widget.itemBuilder(
+              index, widget.data[index % widget.data.length]),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WebViewActivity(
+                          widget.data[index % widget.data.length].actionUrl,
+                          title: widget
+                              .data[index % widget.data.length].bannerTitle,
+                        )));
           },
         );
       },
@@ -125,21 +121,5 @@ class _BannerState extends State<CoustomBanner>{
     _controller.dispose();
     print("销毁");
     super.dispose();
-
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

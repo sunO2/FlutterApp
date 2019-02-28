@@ -3,16 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-
-class SearchPage extends StatefulWidget{
+class SearchPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _SearchPageState();
-
 }
 
-class _SearchPageState extends State<SearchPage>{
-
+class _SearchPageState extends State<SearchPage> {
   static const platform = const MethodChannel('samples.flutter.io/battery');
 
   static const platformDemo = const MethodChannel('flutter_batterylevl');
@@ -33,7 +29,8 @@ class _SearchPageState extends State<SearchPage>{
     String batteryLevel;
     try {
       final int result = await platform.invokeMethod('getBatteryLevel');
-      final resultPlugin = await platformDemo.invokeMethod("getPlatformVersion");
+      final resultPlugin =
+          await platformDemo.invokeMethod("getPlatformVersion");
       batteryLevel = 'Battery level at $result % .$resultPlugin';
     } on PlatformException catch (e) {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
@@ -45,8 +42,6 @@ class _SearchPageState extends State<SearchPage>{
       _batteryLevel = batteryLevel;
     });
   }
-
-
 
   @override
   void initState() {
@@ -61,8 +56,7 @@ class _SearchPageState extends State<SearchPage>{
       appBar: AppBar(
         title: Text("搜索"),
       ),
-     body: Text("电池电量：$_batteryLevel" ),
+      body: Text("电池电量：$_batteryLevel"),
     );
   }
-
 }

@@ -20,12 +20,12 @@ class BannerWidget extends StatefulWidget {
 
   BannerWidget(
       {Key key,
-        @required this.entity,
-        this.height = 180,
-        this.delayTime = 1500,
-        this.duration = 1500,
-        this.bannerPress,
-        this.build})
+      @required this.entity,
+      this.height = 180,
+      this.delayTime = 1500,
+      this.duration = 1500,
+      this.bannerPress,
+      this.build})
       : super(key: key);
 
   @override
@@ -84,22 +84,22 @@ class BannerState extends State<BannerWidget> {
             onTap: () {
               if (widget.bannerPress != null)
                 widget.bannerPress(selectIndex, widget.entity[selectIndex]);
-               start();
+              start();
             },
-            onTapDown: (details){
+            onTapDown: (details) {
               stop();
             },
-            onTapCancel: (){
+            onTapCancel: () {
               start();
             },
             child: widget.build == null
                 ? FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
-                image:
-                widget.entity[index % widget.entity.length].bannerUrl,
-                fit: BoxFit.cover)
+                    placeholder: kTransparentImage,
+                    image:
+                        widget.entity[index % widget.entity.length].bannerUrl,
+                    fit: BoxFit.cover)
                 : widget.build(
-                index, widget.entity[index % widget.entity.length]));
+                    index, widget.entity[index % widget.entity.length]));
       },
     );
   }

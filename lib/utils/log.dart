@@ -1,12 +1,9 @@
-
-
-class LogUtils{
-  static log(String message){
-    try{
+class LogUtils {
+  static log(String message) {
+    try {
       assert(false);
-    }catch(e){
+    } catch (e) {
       print(message + e.toString());
     }
-
   }
 }
