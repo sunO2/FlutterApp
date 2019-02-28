@@ -77,27 +77,39 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(
         elevation: 80.0,
         child: Column(
+          verticalDirection: VerticalDirection.down,
           children: <Widget>[
-            UserAccountsDrawerHeader(
-              accountName: Text("hezhihu89"),
-              accountEmail: Text("hezihu89@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                minRadius: 80.0,
-                backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201409/23/20140923094045_BNYji.thumb.700_0.png"),
+            Expanded(
+              flex: 4,
+              child: UserAccountsDrawerHeader(
+                accountName: Text("hezhihu89"),
+                accountEmail: Text("hezihu89@gmail.com"),
+                currentAccountPicture: CircleAvatar(
+                  minRadius: 80.0,
+                  backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201409/23/20140923094045_BNYji.thumb.700_0.png"),
+                ),
+                otherAccountsPictures:<Widget>[
+                  CircleAvatar(backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201409/27/20140927095143_YaZAM.jpeg"),),
+                  CircleAvatar(backgroundImage: NetworkImage("http://img4.duitang.com/uploads/item/201412/24/20141224224554_SuYth.thumb.700_0.jpeg"),),
+                  CircleAvatar(backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201410/05/20141005082835_2RTzn.thumb.700_0.jpeg"),),
+                ],
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage("http://img15.3lian.com/2015/f2/57/d/93.jpg"),
+                      fit: BoxFit.fitHeight
+                  )
+                ),
               ),
-              otherAccountsPictures:<Widget>[
-                CircleAvatar(backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201409/27/20140927095143_YaZAM.jpeg"),),
-                CircleAvatar(backgroundImage: NetworkImage("http://img4.duitang.com/uploads/item/201412/24/20141224224554_SuYth.thumb.700_0.jpeg"),),
-                CircleAvatar(backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201410/05/20141005082835_2RTzn.thumb.700_0.jpeg"),),
-              ],
             ),
-            Expanded(child: ListView(
-              children: <Widget>[
-                ListTile(leading: CircleAvatar(child: Icon(Icons.add_alert)),title: Text("我的提醒")),
-                ListTile(leading: CircleAvatar(child: Icon(Icons.access_time)),title: Text("时间导航")),
-                ListTile(leading: CircleAvatar(child: Icon(Icons.access_alarm)),title: Text("闹钟集合")),
-                ListTile(leading: CircleAvatar(child: Icon(Icons.account_balance)),title: Text("时间组织")),
-                ListTile(leading: CircleAvatar(child: Icon(Icons.airport_shuttle)),title: Text("时间装载")),
+            Expanded(
+                flex: 5,
+                child: ListView(
+                  children: <Widget>[
+                    ListTile(leading: CircleAvatar(child: Icon(Icons.add_alert)),title: Text("我的提醒")),
+                    ListTile(leading: CircleAvatar(child: Icon(Icons.access_time)),title: Text("时间导航")),
+                    ListTile(leading: CircleAvatar(child: Icon(Icons.access_alarm)),title: Text("闹钟集合")),
+                    ListTile(leading: CircleAvatar(child: Icon(Icons.account_balance)),title: Text("时间组织")),
+                    ListTile(leading: CircleAvatar(child: Icon(Icons.airport_shuttle)),title: Text("时间装载")),
               ],
             ))
           ],
