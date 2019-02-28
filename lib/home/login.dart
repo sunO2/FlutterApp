@@ -57,23 +57,23 @@ class _LoginState extends State<LoginActivity> {
                       child: Column(children: <Widget>[
                         Material(
                             type: MaterialType.canvas,
-                            shape: new StadiumBorder(
-                                side: new BorderSide(
-                                    color: Colors.green,
-                                    style: BorderStyle.solid)),
+                            shape: StadiumBorder(
+//                                side: new BorderSide(
+//                                    color: Colors.green,
+//                                    style: BorderStyle.solid)
+                            ),
                             child: TextFormField(
                               controller: _userNameEditingController,
                               autofocus: false,
                               key: _formStateKey,
-                              validator: (userName) {
-                                if (userName.length < 6) {
-                                  return "用户名必须6位";
-                                }
-                                return null;
-                              },
+//                              validator: (userName) {
+//                                if (userName.length < 6) {
+//                                  return "用户名必须6位";
+//                                }
+//                                return null;
+//                              },
                               decoration: InputDecoration(
                                 isDense: true,
-                                icon: Icon(Icons.verified_user),
                                 hintText: "输入用户名",
                                 labelText: "用户名",
                                 suffixIcon: IconButton(
@@ -88,15 +88,14 @@ class _LoginState extends State<LoginActivity> {
                         TextFormField(
                           autofocus: false,
                           controller: _passwordEditingController,
-                          validator: (userName) {
-                            if (userName.length < 5) {
-                              return "密码长度不对";
-                            }
-                            return null;
-                          },
+//                          validator: (userName) {
+//                            if (userName.length < 5) {
+//                              return "密码长度不对";
+//                            }
+//                            return null;
+//                          },
                           decoration: InputDecoration(
                             isDense: true,
-                            icon: Icon(Icons.verified_user),
                             hintText: "输入密码",
                             labelText: "密码",
                             suffixIcon: IconButton(
