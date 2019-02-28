@@ -74,6 +74,30 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.perm_identity), title: Text("我"))
         ],
       ),
+      drawer: Drawer(
+        elevation: 80.0,
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text("hezhihu89"),
+              accountEmail: Text("hezihu89@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                minRadius: 80.0,
+                backgroundImage: NetworkImage("http://img5.duitang.com/uploads/item/201409/23/20140923094045_BNYji.thumb.700_0.png"),
+              ),
+            ),
+            Expanded(child: ListView(
+              children: <Widget>[
+                ListTile(leading: Icon(Icons.add_alert),title: Text("我的提醒")),
+                ListTile(leading: Icon(Icons.access_time),title: Text("时间导航")),
+                ListTile(leading: Icon(Icons.access_alarm),title: Text("闹钟集合")),
+                ListTile(leading: Icon(Icons.account_balance),title: Text("时间组织")),
+                ListTile(leading: Icon(Icons.airport_shuttle),title: Text("时间装载")),
+              ],
+            ))
+          ],
+        ),
+      ),
     );
   }
 
