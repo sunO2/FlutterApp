@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 //页面适配器
-abstract class Adapter<T>{
-
+abstract class Adapter<T> {
   int getItemSize();
 
   T getItem(int index);

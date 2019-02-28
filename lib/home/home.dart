@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_demo/home/page/AnimatedListSample.dart';
 import 'package:flutter_demo/home/page/homePage.dart';
 import 'package:flutter_demo/home/page/searchPage.dart';
 import 'package:flutter_demo/home/page/sharePage.dart';
-
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -24,9 +22,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => new _MyHomePageState();
 }
 
-
 class _MyHomePageState extends State<MyHomePage> {
-
   //页面
   int _currentIndex = 0;
   GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -55,15 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: '登录',
         disabledElevation: 8.0,
         child: Text(
-            "登录",
+          "登录",
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat ,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         fixedColor: Theme.of(context).primaryColor,
-        onTap: (select){
+        onTap: (select) {
           setState(() {
             print("刷新界面");
             _currentIndex = select;
@@ -71,9 +67,12 @@ class _MyHomePageState extends State<MyHomePage> {
         },
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页")),
-          BottomNavigationBarItem(icon: Icon(Icons.import_contacts), title: Text("分享")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.import_contacts), title: Text("分享")),
           BottomNavigationBarItem(icon: Icon(Icons.search), title: Text("搜索")),
-          BottomNavigationBarItem(icon: Icon(Icons.perm_identity), title: Text("我"))],
+          BottomNavigationBarItem(
+              icon: Icon(Icons.perm_identity), title: Text("我"))
+        ],
       ),
     );
   }
@@ -90,13 +89,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final result = await Navigator.of(context).pushNamed("login");
     print('$result');
-    if(result != null) {
+    if (result != null) {
       _key.currentState.showSnackBar(SnackBar(content: Text("$result")));
     }
   }
 
   // 获取当前界面
-  Widget getCurrentPage(){
+  Widget getCurrentPage() {
     return new IndexedStack(
       children: _pages,
       index: _currentIndex,

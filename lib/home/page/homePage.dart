@@ -10,14 +10,14 @@ import 'package:transparent_image/transparent_image.dart';
 
 class HomePage extends StatelessWidget {
   GlobalKey<ScaffoldState> key = new GlobalKey<ScaffoldState>();
-
   void _login(BuildContext context, int index) async {
     print("index  ----》》》》 ： $index");
     var resul = await Navigator.push(
         context,
-        new MaterialPageRoute(
+        MaterialPageRoute(
             builder: (BuildContext context) =>
-                new LoginActivity(index: index)));
+                new LoginActivity(index: index))
+    );
 
     print("登录数据 $resul");
     if (null != resul) {
