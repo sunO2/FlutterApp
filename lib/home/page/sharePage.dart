@@ -24,6 +24,12 @@ class SharePage extends StatelessWidget {
     return map["d"]["entrylist"];
   }
 
+  void refresh() async {
+    await _getItemDate();
+  }
+
+  GlobalKey globalKey = new GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +37,7 @@ class SharePage extends StatelessWidget {
         title: Text("分享"),
       ),
       body: FutureBuilder(
+        key: globalKey,
         future: _getItemDate(),
         builder: (context, data) {
           switch (data.connectionState) {
@@ -58,8 +65,8 @@ class SharePage extends StatelessWidget {
                           context,
                           new MaterialPageRoute(
                               builder: (BuildContext context) =>
-                                  new WebViewActivity(item["originalUrl"],
-                                      title: item["title"])));
+                              new WebViewActivity(item["originalUrl"],
+                                  title: item["title"])));
 
                       // launch('https://www.baidu.com', forceWebView: true,
                       //        forceSafariVC: true);
@@ -87,9 +94,8 @@ class SharePage extends StatelessWidget {
                 }).toList();
                 return ListView(
                     physics: AlwaysScrollableScrollPhysics(),
-                    children:
-                        ListTile.divideTiles(context: context, tiles: items)
-                            .toList());
+                    children: ListTile.divideTiles(context: context, tiles: items).toList()
+                );
               }
               return Text("哈哈哈哈");
             case ConnectionState.none:
